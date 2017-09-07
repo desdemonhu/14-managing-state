@@ -14,12 +14,17 @@ var app = app || {};
   // REVIEW: With ES6 arrow functions, if the function only has one parameter, you don't need parentheses.
   //         This is similar to saying Article.loadAll = function(rows).
     // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+    // loadAll takes an array sorts it by the publish date then appends each item in the rows to a new article and puts it in article.all
+    //It's call in fetchAll, in article.js
   Article.loadAll = rows => {
     rows.sort((a,b) => (new Date(b.publishedOn)) - (new Date(a.publishedOn)));
     Article.all = rows.map(ele => new Article(ele));
   };
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // fetchAll makes a git request when it's /articles then calls loadAll on the results, then calls the callback function.
+  //articleData is the callback function
+  //fetchAll is called in articleController.js
   Article.fetchAll = callback => {
     $.get('/articles')
     .then(
@@ -55,6 +60,9 @@ var app = app || {};
   };
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  //it looks for an author, it finds all the articles with that author and then it condences the article body to the word count. it does it for each item in the array produced by allAuthors.
+  //it's called in adminView.js
+  //it calls article.allAuthors, which is in article.js too
   Article.numWordsByAuthor = () => {
     return Article.allAuthors().map(author => {
       return {
@@ -75,6 +83,8 @@ var app = app || {};
   };
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  //makes a delete request to server.js when /articles is in the URL, to delete everything in the articles table. Then is logs it in the console.
+  //
   Article.truncateTable = callback => {
     $.ajax({
       url: '/articles',
