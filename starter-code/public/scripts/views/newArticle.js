@@ -5,6 +5,9 @@ var app = app || {};
   const newArticle = {};
 
   // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  ///Show everything with class of tab-content, hides id of export-field. On focus of an id of article-json, it selects that text. On things with an id of new-form it assigns a function to the on change and on submit events.
+  ///It's called at the bottom of newArticle.js
+  ///It assigns two functions in newArticle.js but does not call them
   newArticle.initNewArticlePage = function() {
     $('.tab-content').show();
     $('#export-field').hide();
