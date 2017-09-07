@@ -112,6 +112,7 @@ app.post('/articles', function(request, response) {
 // COMMENT: What is this route doing? Where does it receive a request from?
 // (put your response in a comment here)
 ///This updates the author properties, then it updates the article at the id in the url. Then sends a response that the update has been completed or sends an error message
+///Recieves a request from the url
 app.put('/articles/:id', (request, response) => {
   client.query(`
     UPDATE authors
